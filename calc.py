@@ -89,14 +89,14 @@ print("..........url.............................win chance.........time......")
 for game in longest:
   # print(game['time_class'], game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%c'))
   print(game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%m/%d/%Y, %H:%M:%S'))
-print(".......................................................................")
-
-# print( "Win chances " + str( longest) + "\n")
+print()
 streak_prob = 1
 for game in longest:
   streak_prob *= game['win_chance']
-print( username + " has played", len(games), "games")
 print( "Longest streak: " + str( len(longest)) + " Probabilty of the streak happening when it happend: " + format(streak_prob, ".3%"))
+print(".......................................................................")
+
+
 # print( )
 # prob it happens
 # len(longest)
@@ -122,15 +122,15 @@ avg_win_chance = avg_win_chance  / len(games)
 lnN = math.log(len(games))
 lnP = math.log(avg_win_chance)
 longest_expected = abs( lnN/lnP)
-print("Avarage win chance: ", avg_win_chance)
-print("Longest expected streak:", int(longest_expected) , "(Roughly estimated with # of games and avg win chance)")
-
+print()
+print( username + " has played", len(games), " with an avarge win chance of", format(avg_win_chance, ".1%"))
+print("From this the longest expcted streak would be: ", int(longest_expected) , "(Roughly estimated with # of games and avg win chance)")
 
 # print( str(len(games)) + " number of games, " + str(draws) + " number of draws. ") # A draw is not breaking a streak.")
 # print( "Last game of the streak:")
 # print( str(last_streak_game))
 
-
+print()
 print("Other streaks (games won, chance, date)")
 for streak in all_streaks:
   prob = 1

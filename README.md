@@ -1,9 +1,14 @@
 Pull games from chess.com to find the longest streak.
-Also very roughly estimates the longest expected streak with number of games and avg. win chance.
+Print url, win chance and time for each game in the streak.
+
+Very roughly estimates the longest expected streak (unless I messed up) with
+ln(n)/ln(P) where n is total number of games and P is the avarage win chance.
+
+
 
 # Usage
 
-1. Download a chess.com users games:
+1. Download a chess.com user's games:
 
 ```bash
 python getgames.py <ches.com username>
@@ -68,15 +73,18 @@ https://www.chess.com/game/live/94515756815 95.70% 11/23/2023, 23:02:01
 https://www.chess.com/game/live/94515786139 95.75% 11/23/2023, 23:04:18
 https://www.chess.com/game/live/94515821175 95.79% 11/23/2023, 23:09:25
 https://www.chess.com/game/live/94577930069 91.99% 11/24/2023, 16:19:43
-.......................................................................
-hikaru has played 52315 games
+
 Longest streak: 45 Probabilty of the streak happening when it happend: 5.634%
-Avarage win chance:  0.8362989728220651
-Longest expected streak: 60 (Roughly estimated with # of games and avg win chance)
+.......................................................................
+
+hikaru has played 52315  with an avarge win chance of 83.6%
+From this the longest expcted streak would be:  60 (Roughly estimated with # of games and avg win chance)
+
 Other streaks (games won, chance, date)
 5 , 73.685% 11/21/2023, 17:06:21
 6 , 45.165% 11/22/2023, 00:50:13
 11 , 43.848% 11/22/2023, 18:08:44
 13 , 69.011% 11/22/2023, 19:04:16
 45 , 5.634% 11/23/2023, 16:54:33
+
 ```
