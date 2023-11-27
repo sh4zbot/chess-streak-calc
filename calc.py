@@ -81,9 +81,7 @@ for i in range(len(games)):
 
   filtered.append(games[i])
   all_win_chances.append(win_chance)
-  # draw_strings = [ "agreed", "repetition", "timeout", "abandoned", "50move"]
   draw_strings = [ "agreed", "repetition", "stalemate", "50move" ]
-  # draw_strings = []
   if user['result'] == 'win':
     games[i]['draw'] = False
     current.append( games[i])
@@ -101,17 +99,6 @@ for i in range(len(games)):
     games[i]['draw'] = False
     current = []
 
-
-  # if (relative > 150) or (relative < -150) and win:
-  # if (relative < -150) and win:
-  #   print( "OVER UNDER " + str(relative))
-  #   print('User rating '      + str(user['rating']) + ', Opponent rating '  + str(opponent['rating']))
-  #   print('Relative rating '  + str(relative) + ', win_chance ' + str(win_chance))
-  #   if( win):
-  #     print("WE WON!!!!!!!!")
-  # print(game['time_control'])
-
-# print( "Longest streak url's:")
 print("..........url.............................win chance.........time......")
 for game in longest:
   # print(game['time_class'], game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%c'))
@@ -126,15 +113,6 @@ else:
   draw_text = "disallowing draws: "
 print( "Longest streak " + draw_text + str( len(longest)) + " Probabilty of the streak happening when it happend: " + format(streak_prob, ".3%"))
 print(".......................................................................")
-
-
-# print( )
-# prob it happens
-# len(longest)
-
-
-# print(all_win_chances[0:9])
-# print()
 
 # TODO: at least once, this does not work at all
 # at_least_once = 0
