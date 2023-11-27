@@ -1,8 +1,8 @@
-Pull games from chess.com to find the longest streak.
-Print url, win chance and time for each game in the streak.
+Pull games from chess.com to find the longest win streak.
+Print url, win chance and time for each game during the streak.
 
-Very roughly estimates the longest expected streak (unless I messed up) with
-ln(n)/ln(P) where n is total number of games and P is the avarage win chance.
+Very roughly estimates the longest expected win streak (unless I messed up) with
+ln(n)/ln(P) where n is total number of all games the user has played and P is the avarage win chance.
 
 
 
