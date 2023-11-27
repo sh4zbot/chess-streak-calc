@@ -15,10 +15,10 @@ python getgames.py <ches.com username>
 python calc.py <chess.com username> <optional date string YYYYMMDD>
 ```
 
-## Example:
+## Example (find longest streak of hikaru since 20th of Nov 2023):
 ```bash
 python getgames.py hikaru
-python calc.py hikaru
+python calc.py hikaru 20231120
 ```
 Output:
 ```
