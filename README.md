@@ -77,7 +77,7 @@ https://www.chess.com/game/live/94577930069 91.99% 11/24/2023, 16:19:43
 Longest streak: 45 Probabilty of the streak happening when it happend: 5.634%
 .......................................................................
 
-hikaru has played 52315  with an avarge win chance of 83.6%
+hikaru has played 52315 games with an avarge win chance of 83.6%
 From this the longest expcted streak would be:  60 (Roughly estimated with # of games and avg win chance)
 
 Other streaks (games won, chance, date)

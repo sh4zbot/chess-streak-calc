@@ -123,7 +123,7 @@ lnN = math.log(len(games))
 lnP = math.log(avg_win_chance)
 longest_expected = abs( lnN/lnP)
 print()
-print( username + " has played", len(games), " with an avarge win chance of", format(avg_win_chance, ".1%"))
+print( username + " has played", len(games), "games with an avarge win chance of", format(avg_win_chance, ".1%"))
 print("From this the longest expcted streak would be: ", int(longest_expected) , "(Roughly estimated with # of games and avg win chance)")
 
 # print( str(len(games)) + " number of games, " + str(draws) + " number of draws. ") # A draw is not breaking a streak.")
