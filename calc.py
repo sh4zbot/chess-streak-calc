@@ -45,7 +45,7 @@ if args.date:
   month = int( args.date[4:6])
   day   = int( args.date[6:8])
   epoch = int( datetime.datetime(year, month, day, 0, 0, 0).strftime('%s'))
-  print(year, month, day)
+  # print(year, month, day)
 
 filename = "games/" + username + ".json"
 with open(filename, 'r') as openfile:
@@ -115,7 +115,7 @@ for i in range(len(games)):
 print("..........url.............................win chance.........time......")
 for game in longest:
   # print(game['time_class'], game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%c'))
-  print(game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%m/%d/%Y, %H:%M:%S'), "draw: " + str(game['draw']))
+  print(game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%m/%d/%Y %H:%M:%S'))
 print()
 streak_prob = 1
 for game in longest:
@@ -156,10 +156,6 @@ longest_expected = abs( lnN/lnP)
 print()
 print( username + " has played", len(games), "games with an avarge win chance of", format(avg_win_chance, ".1%"), "and " + str(draws) + " draws")
 print("From this the longest expcted streak would be: ", int(longest_expected) , "(Roughly estimated with # of games and avg win chance)")
-
-# print( str(len(games)) + " number of games, " +  + " number of draws. ") # A draw is not breaking a streak.")
-# print( "Last game of the streak:")
-# print( str(last_streak_game))
 
 print()
 print("Other streaks (games won, chance, date)")
