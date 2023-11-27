@@ -3,11 +3,21 @@
     Print some stats.
     Roughly calculate how long streak is likley to have happend.
 
-    First download games:     python getgames.py <username>
-    Get winstreak and stats:  python calc.py <username> <optional date string>
+    First download games:
+    python getgames.py <username>
+
+    Get winstreak and stats:
+    python calc.py <username> <optional date string>
+
+    Allow draws in winstreak
+    python calc.py -d <username> <optional date string>
+
+    options:
+      -d : allow win streaks
 
     <username>    = chess.com username you want to look up
     <date string> = YYYYMMDD
+
 
     If date is provided filter out all games prior to date
 """
@@ -18,15 +28,24 @@ import json
 import sys
 import datetime
 import math
+import argparse
 
-username = str( sys.argv[1])
+parser = argparse.ArgumentParser("Find chess.com user longest winning streak")
+parser.add_argument("username")
+parser.add_argument("date", nargs='?', action='store')
+parser.add_argument('-d', '--draw',
+                    action='store_true')
+args = parser.parse_args()
+# print(args.draw)
+username = args.username
 epoch = 0
-if len(sys.argv) > 2:
-  date  = sys.argv[2]
-  year  = int( date[0:4])
-  month = int( date[4:6])
-  day   = int( date[6:8])
+if args.date:
+  # date  = sys.argv[2]
+  year  = int( args.date[0:4])
+  month = int( args.date[4:6])
+  day   = int( args.date[6:8])
   epoch = int( datetime.datetime(year, month, day, 0, 0, 0).strftime('%s'))
+  print(year, month, day)
 
 filename = "games/" + username + ".json"
 with open(filename, 'r') as openfile:
@@ -63,18 +82,26 @@ for i in range(len(games)):
   filtered.append(games[i])
   all_win_chances.append(win_chance)
   # draw_strings = [ "agreed", "repetition", "timeout", "abandoned", "50move"]
-  # draw_strings = [ "agreed", "repetition" ]
-  draw_strings = []
+  draw_strings = [ "agreed", "repetition", "stalemate", "50move" ]
+  # draw_strings = []
   if user['result'] == 'win':
-    win = 1
+    games[i]['draw'] = False
     current.append( games[i])
     if( len( current) > len( longest)):
       all_streaks.append( current)
       longest = current
+  elif user['result'] in draw_strings:
+    games[i]['draw'] = True
+    draws += 1
+    if args.draw:
+      continue
+    else:
+      current = []
   else:
-    win = 0
-    current_streak = 0
+    games[i]['draw'] = False
     current = []
+
+
   # if (relative > 150) or (relative < -150) and win:
   # if (relative < -150) and win:
   #   print( "OVER UNDER " + str(relative))
@@ -88,12 +115,16 @@ for i in range(len(games)):
 print("..........url.............................win chance.........time......")
 for game in longest:
   # print(game['time_class'], game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%c'))
-  print(game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%m/%d/%Y, %H:%M:%S'))
+  print(game['url'], format(game['win_chance'], ".2%"), datetime.datetime.fromtimestamp(game['end_time']).strftime('%m/%d/%Y, %H:%M:%S'), "draw: " + str(game['draw']))
 print()
 streak_prob = 1
 for game in longest:
   streak_prob *= game['win_chance']
-print( "Longest streak: " + str( len(longest)) + " Probabilty of the streak happening when it happend: " + format(streak_prob, ".3%"))
+if args.draw:
+  draw_text = "allowing draws: "
+else:
+  draw_text = "disallowing draws: "
+print( "Longest streak " + draw_text + str( len(longest)) + " Probabilty of the streak happening when it happend: " + format(streak_prob, ".3%"))
 print(".......................................................................")
 
 
@@ -123,10 +154,10 @@ lnN = math.log(len(games))
 lnP = math.log(avg_win_chance)
 longest_expected = abs( lnN/lnP)
 print()
-print( username + " has played", len(games), "games with an avarge win chance of", format(avg_win_chance, ".1%"))
+print( username + " has played", len(games), "games with an avarge win chance of", format(avg_win_chance, ".1%"), "and " + str(draws) + " draws")
 print("From this the longest expcted streak would be: ", int(longest_expected) , "(Roughly estimated with # of games and avg win chance)")
 
-# print( str(len(games)) + " number of games, " + str(draws) + " number of draws. ") # A draw is not breaking a streak.")
+# print( str(len(games)) + " number of games, " +  + " number of draws. ") # A draw is not breaking a streak.")
 # print( "Last game of the streak:")
 # print( str(last_streak_game))
 

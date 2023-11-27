@@ -20,6 +20,11 @@ python getgames.py <ches.com username>
 python calc.py <chess.com username> <optional date string YYYYMMDD>
 ```
 
+3. Include draws in in the win streak
+```bash
+python calc.py -d <username> <optional date>
+```
+
 ## Example (find longest streak of hikaru since 20th of Nov 2023):
 ```bash
 python getgames.py hikaru
