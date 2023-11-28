@@ -5,7 +5,7 @@
 """
 
 from urllib.request import urlopen
-
+import os
 import json
 import sys
 
@@ -23,6 +23,9 @@ for month_url in data_json['archives']:
   for game in month_games:
     all_games.append(game)
   print("Retrived " + str(len(all_games)) + " games...")
+
+#Make the games directory, so that we can store the files in it
+os.makedirs("games/", exist_ok = True)
 
 filename = "games/" + username + ".json"
 with open(filename, 'w', encoding='utf-8') as f:
